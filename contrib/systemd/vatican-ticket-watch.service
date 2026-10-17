@@ -1,0 +1,21 @@
+# systemd user service (Linux): keeps the watcher running, survives reboots, and stops for good
+# once all dates have passed (clean exit).
+#
+#   cp contrib/systemd/vatican-ticket-watch.service ~/.config/systemd/user/
+#   # edit ExecStart below
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now vatican-ticket-watch
+#   loginctl enable-linger "$USER"     # keep running while you are logged out
+#   journalctl --user -u vatican-ticket-watch -f
+
+[Unit]
+Description=Vatican Museums ticket watcher
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 %h/vatican-ticket-watch/vatican_watch.py --date 2026-10-17 --visitors 4 --same-day --ntfy pick-a-long-random-topic
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=default.target

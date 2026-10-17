@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  macOS LaunchAgent: starts the watcher at login, restarts it if it crashes, and lets it stop for
+  good once all dates have passed (clean exit).
+
+  1. Replace every /Users/YOU/... path and the arguments below.
+  2. cp contrib/launchd/local.vatican-ticket-watch.plist ~/Library/LaunchAgents/
+  3. launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/local.vatican-ticket-watch.plist
+  Stop: launchctl bootout gui/$(id -u)/local.vatican-ticket-watch
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>local.vatican-ticket-watch</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/YOU/vatican-ticket-watch/vatican_watch.py</string>
+        <string>--date</string>
+        <string>2026-10-17</string>
+        <string>--visitors</string>
+        <string>4</string>
+        <string>--same-day</string>
+        <string>--ntfy</string>
+        <string>pick-a-long-random-topic</string>
+        <string>--notify</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/YOU/Library/Logs/vatican-ticket-watch.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/YOU/Library/Logs/vatican-ticket-watch.log</string>
+</dict>
+</plist>

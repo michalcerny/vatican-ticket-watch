@@ -1,0 +1,50 @@
+<!-- trimmed copy of disponibilita.museivaticani.va, pax=4, 2026-10-15 07:12 -->
+<html><body>
+<main class="container">
+        <div class="row mt-4 mb-4">
+        <div class="col-12 text-center">
+            <h2>Tickets availability</h2>
+        </div>
+    </div>
+    <form action="https://disponibilita.museivaticani.va" method="get" x-data x-ref="paxForm">
+        <input type="hidden" name="_method" value="post">        <div class="row mb-4 d-flex flex-wrap justify-content-center">
+            <div class="col-6 col-lg-3 col-xl-2">
+                <div class="input-group">
+                    <label for="pax" class="input-group-text">People:</label>
+                    <input type="number" id="pax" min="1" name="pax" value="4" class="form-control text-center"
+                           @change.debounce="$refs.paxForm.submit()">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row d-flex flex-wrap justify-content-center">
+        <div class="col-12 col-lg-6 mb-3">
+            <div class="card text-bg-success h-100">
+                <div class="card-header"><h3 class="card-title mb-0">Tickets available</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4 text-center">
+                                                        <img src="https://disponibilita.museivaticani.va/images/icons/circle-check.svg"
+                                 alt="Tickets available" style="width: 5em;">
+                        </div>
+                        <div class="col-8 text-start">
+                                                            <h4>Times</h4>
+                                                                    <span class="badge rounded-pill bg-white-20">
+                                        08:00
+                                                                            </span>
+                                                                                    </div>
+                    </div>
+                </div>
+                                    <div class="card-footer text-end">
+                        <a href="https://tickets.museivaticani.va/home/visit/4/1792015200000/1?lang=en"
+                           class="btn btn-outline-light">Buy</a>
+                    </div>
+                            </div>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-12 text-center">Last update: 2 minutes ago</div>
+    </div>
+</main>
+</body></html>
